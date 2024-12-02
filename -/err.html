@@ -1,0 +1,295 @@
+<!-- 1. -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const op1 = document.getElementById("op1");
+        const op2 = document.getElementById("op2");
+        const op3 = document.getElementById("op3");
+        const op2Result = document.getElementById("op2_result");
+        const fileArea = document.querySelector(".file > textarea");
+        const op3Result = document.getElementById("op3_result");
+        const fileArea02 = document.querySelector(".file-upload-area");
+
+        const btnAddress = document.querySelector(".tab-btn button:nth-child(1)");
+        const btnBulkInput = document.querySelector(".tab-btn button:nth-child(2)");
+        const btnFileInput = document.querySelector(".tab-btn button:nth-child(3)");
+        const confirmButton = document.querySelector("#op2 button:nth-child(1)");
+        const addButton20 = document.querySelector("#op2 button:nth-child(2)");
+        const confirmButton02 = document.querySelector("#op3 button:nth-child(1)");
+        const addButton2002 = document.querySelector("#op3  button:nth-child(2)");
+
+        // 기본적으로 페이지 로딩 시 주소록이 눌린 상태로 설정
+    //   ******
+      op1.style.display = "block";
+        op2.style.display = "none";
+        op3.style.display = "none";
+
+        btnAddress.addEventListener("click", function () {
+            op1.style.display = "block";
+            op2.style.display = "none";
+            op3.style.display = "none";
+        });
+
+        btnBulkInput.addEventListener("click", function () {
+            op1.style.display = "none";
+            op2.style.display = "block";
+            op3.style.display = "none";
+        });
+
+        btnFileInput.addEventListener("click", function () {
+            op1.style.display = "none";
+            op2.style.display = "none";
+            op3.style.display = "block";
+        });
+
+        confirmButton.addEventListener("click", function () {
+            // 확인 버튼 클릭 시 op2_result 표시 및 .file 숨김
+            op2Result.style.display = "block"; // 테이블 형태로 변경
+            fileArea.style.display = "none";
+            confirmButton.style.display = "none";
+            addButton20.style.display = "block";
+        });
+
+        confirmButton02.addEventListener("click", function () {
+            // 확인 버튼 클릭 시 op2_result 표시 및 .file 숨김
+            op3Result.style.display = "block"; // 테이블 형태로 변경
+            fileArea02.style.display = "none";
+            confirmButton02.style.display = "none";
+            addButton2002.style.display = "block";
+        });
+    });
+
+
+
+
+
+    // 2.
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const groupTable = document.getElementById("group_list");
+        const abcTable = document.getElementById("abc_list");
+        const groupRadio = document.getElementById("group");
+        const abcRadio = document.getElementById("abc");
+
+        // Function to toggle table visibility based on selected radio button
+        function toggleTableVisibility() {
+        //    *******
+            abcTable.style.display = abcRadio.checked ? "block" : "none";
+            groupTable.style.display = groupRadio.checked ? "block" : "none";
+        }
+
+        // Initial setup
+    //  *******
+     toggleTableVisibility();
+
+        // Add event listener to radio buttons
+        groupRadio.addEventListener("change", toggleTableVisibility);
+        abcRadio.addEventListener("change", toggleTableVisibility);
+    });
+
+
+
+
+    // 3.
+
+    function toggleChargeTab(tab) {
+        // 모든 내역 비활성화
+        document.querySelectorAll(".myCg, .comCg").forEach(function (element) {
+            element.style.display = "none";
+        });
+
+        // 클릭한 탭에 따라 해당하는 내역을 활성화
+        document.querySelector("." + tab).style.display = "block";
+    }
+
+    // com.js 파일에 저장될 JavaScript 코드
+    document.addEventListener("DOMContentLoaded", function () {
+        // HTML 요소 선택
+        const modifyOption = document.getElementById("abc");
+        const cancelOption = document.getElementById("group");
+        const modifyChargeSection = document.querySelector(".chargeCg");
+        const cancelChargeSection = document.querySelector(".chargeCc");
+
+        // 초기 설정: 충전금액수정 옵션 선택
+    // ******
+    modifyChargeSection.style.display = "block";
+        cancelChargeSection.style.display = "none";
+
+        // 충전 옵션 변경 시 이벤트 처리
+        modifyOption.addEventListener("change", function () {
+            if (this.checked) {
+                modifyChargeSection.style.display = "block";
+                cancelChargeSection.style.display = "none";
+            }
+        });
+
+        cancelOption.addEventListener("change", function () {
+            if (this.checked) {
+                modifyChargeSection.style.display = "none";
+                cancelChargeSection.style.display = "block";
+            }
+        });
+    });
+
+
+
+    // 4.
+
+
+    // 비밀번호 변경
+    document.addEventListener("DOMContentLoaded", function () {
+        const changePasswordBtn = document.querySelector(".btn-sm-gray"); // 비밀번호 변경 버튼
+        const passwordFields = document.querySelector(".pwd-change"); // pwd-change 클래스를 가진 요소 선택
+        const passwordLabel = document.querySelector(".pwd-change02"); // 비밀번호 label 요소 선택
+
+        // 비밀번호 변경 버튼 클릭 시
+      //*******
+       changePasswordBtn.addEventListener("click", function () {
+            if (
+                passwordFields.style.display === "none" ||
+                passwordFields.style.display === ""
+            ) {
+                passwordFields.style.display = "block"; // pwd-change 클래스를 가진 요소를 보이도록 설정
+                passwordLabel.style.display = "none"; // 비밀번호 label 요소를 숨김 처리
+            }
+        });
+
+        // 취소 버튼 클릭 시
+        const cancelButton = document.querySelector(".pwd-change .btn-sm-gray"); // pwd-change 내의 취소 버튼 선택
+        cancelButton.addEventListener("click", function () {
+            passwordFields.style.display = "none"; // pwd-change 클래스를 가진 요소를 숨기도록 설정
+            passwordLabel.style.display = "block"; // 비밀번호 label 요소를 다시 보이도록 설정
+            resetPasswordFields(); // 비밀번호 필드 초기화
+        });
+
+        function resetPasswordFields() {
+            const passwordInputs = document.querySelectorAll(
+                '.pwd-change input[type="text"]'
+            ); // pwd-change 내의 input 요소들
+
+            // 입력된 비밀번호 초기화
+            passwordInputs.forEach(function (input) {
+                input.value = "";
+            });
+        }
+    });
+
+
+
+    5.
+
+
+    // abc_list 선택
+    document.addEventListener("DOMContentLoaded", function () {
+        var table = document.getElementById("abc_list");
+    //  *******
+       var checkboxes = table.querySelectorAll("input[type='checkbox']");
+        var rows = table.querySelectorAll("tbody tr");
+        var chkAll = table.querySelector("#chk_all");
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", function () {
+                var row = this.closest("tr");
+
+                if (this.checked) {
+                    row.classList.add("selected");
+                } else {
+                    row.classList.remove("selected");
+                }
+            });
+        });
+
+        rows.forEach(function (row) {
+            row.style.cursor = "pointer"; // 각 행에 커서 포인터 설정
+
+            row.addEventListener("click", function () {
+                var checkbox = this.querySelector("input[type='checkbox']");
+                checkbox.checked = !checkbox.checked;
+
+                if (checkbox.checked) {
+                    this.classList.add("selected");
+                } else {
+                    this.classList.remove("selected");
+                }
+            });
+        });
+
+        chkAll.addEventListener("change", function () {
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = chkAll.checked;
+
+                var row = checkbox.closest("tr");
+
+                if (chkAll.checked) {
+                    row.classList.add("selected");
+                } else {
+                    row.classList.remove("selected");
+                }
+            });
+        });
+    });
+
+
+
+    // 6.
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var table = document.getElementById("group_list");
+    // ******
+     var checkboxes = table.querySelectorAll("input[type='checkbox']");
+        var rows = table.querySelectorAll("tbody tr:not(.group-header)");
+        var chkAllGroups = table.querySelectorAll("input[id^='chk_all_group']");
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", function () {
+                var row = this.closest("tr");
+
+                if (this.checked) {
+                    row.classList.add("selected");
+                } else {
+                    row.classList.remove("selected");
+                }
+
+                // 그룹 헤더의 경우 selected 클래스를 추가하지 않도록 합니다.
+                if (row.classList.contains("group-header")) {
+                    row.classList.remove("selected");
+                }
+            });
+        });
+
+        rows.forEach(function (row) {
+            row.style.cursor = "pointer"; // 각 행에 커서 포인터 설정
+
+            row.addEventListener("click", function (event) {
+                if (event.target.tagName !== "INPUT") {
+                    var checkbox = this.querySelector("input[type='checkbox']");
+                    checkbox.checked = !checkbox.checked;
+
+                    if (checkbox.checked) {
+                        this.classList.add("selected");
+                    } else {
+                        this.classList.remove("selected");
+                    }
+                }
+            });
+        });
+
+        chkAllGroups.forEach(function (chkAll) {
+            chkAll.addEventListener("change", function () {
+                var groupName = this.id.split("_")[2]; // 그룹 이름 추출
+
+                var groupRows = document.querySelectorAll("." + groupName);
+                groupRows.forEach(function (row) {
+                    var checkbox = row.querySelector("input[type='checkbox']");
+                    checkbox.checked = chkAll.checked;
+
+                    if (chkAll.checked) {
+                        row.classList.add("selected");
+                    } else {
+                        row.classList.remove("selected");
+                    }
+                });
+            });
+        });
+</script>

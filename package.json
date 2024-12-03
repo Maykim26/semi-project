@@ -1,0 +1,21 @@
+{
+	"name": "semiproject",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"build:game": "cd game && parcel build index.html --dist-dir ../dist",
+		"build:news": "cd news && parcel build index.html --dist-dir ../dist",
+		"build:todo": "cd todo && parcel build index.html --dist-dir ../dist",
+		"build:all": "npm run build:game && npm run build:news && npm run build:todo",
+		"deploy": "gh-pages -d dist"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"parcel": "^2.13.2"
+	},
+	"devDependencies": {
+		"gh-pages": "^6.2.0"
+	}
+}

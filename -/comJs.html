@@ -1,0 +1,1078 @@
+<script>
+    // menu dropdown
+    $(function () {
+        $(" .menu > li").hover(
+            function () {
+                //마우스 올렸을 때
+                $(this).children(".sub_wrap").stop().slideDown();
+            },
+            function () {
+                //마우스 뗐을 때
+                $(this).children(".sub_wrap").stop().slideUp();
+            }
+        );
+    });
+
+    // // lnb menu dropdown
+    document.addEventListener("DOMContentLoaded", function () {
+        var menuItemsWithSubmenu = document.querySelectorAll(
+            ".lnb .menu > li > .submenu"
+        );
+
+        menuItemsWithSubmenu.forEach(function (submenu) {
+            submenu.parentNode.addEventListener("click", function (event) {
+                var clickedSubmenu = this.querySelector(".submenu");
+
+                if (clickedSubmenu.style.display === "block") {
+                    clickedSubmenu.style.display = "none";
+                    this.classList.remove("active"); // 하위 메뉴 닫을 때 active 클래스 제거
+                    this.style.marginBottom = "0"; // margin-bottom 초기화
+                } else {
+                    // 모든 다른 하위 메뉴 숨기기 및 active 클래스 제거
+                    menuItemsWithSubmenu.forEach(function (el) {
+                        if (el !== submenu) {
+                            el.style.display = "none";
+                            el.parentNode.classList.remove("active");
+                            el.parentNode.style.marginBottom = "0"; // 다른 메뉴의 margin-bottom 초기화
+                        }
+                    });
+
+                    clickedSubmenu.style.display = "block";
+                    this.classList.add("active"); // 하위 메뉴 열 때 active 클래스 추가
+                    this.style.marginBottom =
+                        clickedSubmenu.clientHeight + "px";
+                }
+                event.stopPropagation(); // 메뉴 클릭 시 상위 이벤트 전파 방지
+            });
+
+            var submenuItems = submenu.querySelectorAll("li");
+            submenuItems.forEach(function (submenuItem) {
+                submenuItem.addEventListener("click", function (event) {
+                    event.stopPropagation(); // 하위 메뉴 항목 클릭 시 이벤트 전파 방지
+
+                    // 모든 다른 하위 메뉴 항목에서 .active 클래스 제거
+                    submenuItems.forEach(function (item) {
+                        item.classList.remove("active");
+                    });
+
+                    // 클릭된 항목에 .active 클래스 추가
+                    this.classList.add("active");
+                });
+            });
+        });
+
+        // 메뉴 외의 영역 클릭 시 하위 메뉴 닫기
+        // document.addEventListener("click", function (event) {
+        //     if (!event.target.closest(".lnb .menu .lnb_bottom")) {
+        //         menuItemsWithSubmenu.forEach(function (submenu) {
+        //             submenu.style.display = "none";
+        //             submenu.parentNode.classList.remove("active"); // 다른 영역 클릭 시 active 클래스 제거
+        //             submenu.parentNode.style.marginBottom = "0"; // margin-bottom 초기화
+        //         });
+        //     }
+        // });
+    });
+    // lnb 메뉴선택
+    document.addEventListener("DOMContentLoaded", function () {
+        var menuItems = document.querySelectorAll(".lnb .menu > li");
+
+        menuItems.forEach(function (menuItem) {
+            menuItem.addEventListener("click", function () {
+                // 모든 다른 메뉴 아이템에서 .on 클래스 제거
+                menuItems.forEach(function (item) {
+                    item.classList.remove("on");
+                });
+
+                // 클릭된 메뉴 아이템에 .on 클래스 추가
+                this.classList.add("on");
+            });
+        });
+    });
+
+    // tab button
+    $(function () {
+        $(".tab-content").eq(0).show(0);
+        $(".tab-btn button").click(function () {
+            var idx = $(this).index();
+
+            $(".tab-content").hide();
+            $(".tab-content").eq(idx).show();
+            $(".tab-btn button").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+
+    // tab button02
+    $(function () {
+        $(".tab-content").eq(0).show(0);
+        $(".tab-btn02 button").click(function () {
+            var idx = $(this).index();
+
+            $(".tab-content").hide();
+            $(".tab-content").eq(idx).show();
+            $(".tab-btn02 button").removeClass("active");
+            $(this).addClass("active");
+        });
+    }); // tab button03
+    $(function () {
+        $(".tab-content").eq(0).show(0);
+        $(".tab-btn03 button").click(function () {
+            var idx = $(this).index();
+
+            $(".tab-content").hide();
+            $(".tab-content").eq(idx).show();
+            $(".tab-btn03 button").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+    // tab button04
+    $(function () {
+        $(".tab-content").eq(0).show(0);
+        $(".tab-btn04 button").click(function () {
+            var idx = $(this).index();
+
+            $(".tab-content").hide();
+            $(".tab-content").eq(idx).show();
+            $(".tab-btn04 button").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+    // 230527 added 230531 added
+    // noit-box
+    $(function () {
+        $(".noti-btn-box .noti-btns div").click(function () {
+            var idx = $(this).index();
+
+            if ($(".noti-btns-result").eq(idx).css("display") == "block") {
+                $(".noti-btns-result").hide();
+                $(".noti-btn-box .noti-btns div").removeClass("underline");
+                $(".noti-btn-box .noti-btns div p").removeClass("ic-order-c");
+            } else {
+                $(".noti-btns-result").hide();
+                $(".noti-btns-result").eq(idx).show();
+                $(".noti-btn-box .noti-btns div").removeClass("underline");
+                $(".noti-btn-box .noti-btns div p").removeClass("ic-order-c");
+                $(this).addClass("underline");
+                $(this).children("p").addClass("ic-order-c");
+            }
+        });
+    });
+
+    // 230530 added
+    // table order
+    $(function () {
+        $(".table_list .ic-order").click(function () {
+            $(this).toggleClass("ic-order2");
+        });
+
+        $.each($(".table_list"), function (tableIdx, tableEle) {
+            if ($(this).find(".ic-order").length > 0) {
+                $.each($(this).find("thead th"), function (thIdx, thEle) {
+                    if (!$(this).hasClass("ic-order")) {
+                        $(this).attr("data-sorter", "false");
+                    }
+                });
+
+                $(this).tablesorter();
+            }
+        });
+    });
+    // table order
+    $(function () {
+        $(".table_list th .ic-order").click(function () {
+            $(this).toggleClass("ic-order2");
+        });
+
+        $.each($(".table_list th"), function (tableIdx, tableEle) {
+            if ($(this).find(".ic-order").length > 0) {
+                $.each($(this).find("thead th div"), function (thIdx, thEle) {
+                    if (!$(this).hasClass("ic-order")) {
+                        $(this).attr("data-sorter", "false");
+                    }
+                });
+
+                $(this).tablesorter();
+            }
+        });
+    });
+
+    // checkbox
+    $(document).ready(function () {
+        $("#chk_all").click(function () {
+            if ($("#chk_all").is(":checked"))
+                $("input[name=chk]").prop("checked", true);
+            else $("input[name=chk]").prop("checked", false);
+        });
+        $("#chk_all02").click(function () {
+            if ($("#chk_all02").is(":checked"))
+                $("input[name=chk02]").prop("checked", true);
+            else $("input[name=chk02]").prop("checked", false);
+        });
+        $("#chk_all03").click(function () {
+            if ($("#chk_all03").is(":checked"))
+                $("input[name=chk03]").prop("checked", true);
+            else $("input[name=chk03]").prop("checked", false);
+        });
+        $("input[name=chk]").click(function () {
+            var total = $("input[name=chk]").length;
+            var checked = $("input[name=chk]:checked").length;
+
+            if (total != checked) $("#chk_all").prop("checked", false);
+            else $("#chk_all").prop("checked", true);
+        });
+
+        // 230527 added
+        // 체크박스가 체크되면 버튼 활성화
+        $('.table_list input[type="checkbox"]').click(function () {
+            var tmpp = $('.table_list input[type="checkbox"]:checked').length;
+            // this를 사용하여 클릭한 checkbox 가 체크되도록 설정
+            if (tmpp > 0) {
+                $(".btns button.btn01,.btn02,.btn03,.btn07")
+                    .removeClass("disabled")
+                    .prop("disabled", false);
+            } else {
+                $(".btns button.btn01,.btn02,.btn03,.btn07")
+                    .addClass("disabled")
+                    .prop("disabled", true);
+            }
+        });
+    });
+
+    //checkbox group
+
+    $(document).ready(function () {
+        $("input[id^=chk_all_group]").click(function () {
+            var groupId = $(this).attr("id").replace("chk_all_", "");
+            $("input[name^=chk_" + groupId + "]").prop(
+                "checked",
+                $(this).is(":checked")
+            );
+        });
+
+        $("input[name^=chk_group]").click(function () {
+            var groupId = $(this).attr("name").replace("chk_", "");
+            var total = $("input[name^=chk_" + groupId + "]").length;
+            var checked = $("input[name^=chk_" + groupId + "]:checked").length;
+            $("#chk_all_" + groupId).prop("checked", total === checked);
+        });
+    });
+
+    // toggle, 알림회신 area folding
+    $(document).ready(function () {
+        $(".toggle-switch").click(function () {
+            if ($(".content-unfold").css("display") == "none") {
+                $(".content-unfold").slideDown();
+                $(".content-unfold").addClass("unfold");
+                $(".container").attr("class", "container-unfold");
+            } else if ($(".content-unfold").css("display") == "block") {
+                $(".content-unfold").slideUp();
+                $(".content-unfold").removeClass("unfold");
+                $(".container-unfold").attr("class", "container");
+            }
+        });
+    });
+
+    // 셀렉트박스 여닫기
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     const labels = document.querySelectorAll(".label");
+
+    //     function clickLabel(e) {
+    //         const label = e.currentTarget;
+    //         const optionList = label.nextElementSibling;
+    //         const optionItems = optionList.querySelectorAll(".optionItem");
+
+    //         if (label.parentNode.classList.contains("active")) {
+    //             label.parentNode.classList.remove("active");
+    //         } else {
+    //             labels.forEach(function (lb) {
+    //                 lb.parentNode.classList.remove("active");
+    //             });
+    //             label.parentNode.classList.add("active");
+    //         }
+
+    //         optionItems.forEach(function (opt) {
+    //             opt.removeEventListener("click", handleSelect);
+    //             opt.addEventListener("click", handleSelect);
+    //         });
+    //     }
+
+    //     function handleSelect(e) {
+    //         e.stopPropagation();
+    //         const label = e.currentTarget
+    //             .closest(".input-box")
+    //             .querySelector(".label");
+    //         const item = e.currentTarget;
+
+    //         const checkbox = item.querySelector('input[type="checkbox"]');
+    //         if (checkbox) {
+    //             checkbox.checked = !checkbox.checked;
+    //             return;
+    //         }
+
+    //         if (!item.classList.contains("optionItem")) {
+    //             label.innerHTML = item.textContent;
+    //             label.parentNode.classList.remove("active");
+    //         }
+    //     }
+
+    //     function handleClose(e) {
+    //         const isClickInsideLabel = e.target.closest(".label");
+    //         const isClickInsideOptionItem = e.target.closest(".optionItem");
+
+    //         if (!isClickInsideLabel && !isClickInsideOptionItem) {
+    //             labels.forEach(function (lb) {
+    //                 lb.parentNode.classList.remove("active");
+    //             });
+    //         }
+    //     }
+
+    //     labels.forEach(function (lb) {
+    //         lb.addEventListener("click", clickLabel);
+    //     });
+
+    //     window.addEventListener("click", handleClose);
+    // });
+
+    // 셀렉트박스여닫기 원래버전
+    $(document).ready(function () {
+        const label = document.querySelectorAll(".label");
+        label.forEach(function (lb) {
+            lb.addEventListener("click", (e) => {
+                let optionList = lb.nextElementSibling;
+                let optionItems = optionList.querySelectorAll(".optionItem");
+                clickLabel(lb, optionItems);
+            });
+        });
+        const clickLabel = (lb, optionItems) => {
+            // ****************** 추가된 부분 START
+            // 내가 아닌 다른 select 닫기
+            label.forEach(function (itemLb) {
+                if (lb !== itemLb) {
+                    itemLb.parentNode.classList.remove("active");
+                }
+            });
+            // ****************** 추가된 부분 END
+
+            if (lb.parentNode.classList.contains("active")) {
+                lb.parentNode.classList.remove("active");
+                optionItems.forEach((opt) => {
+                    opt.removeEventListener("click", () => {
+                        handleSelect(lb, opt);
+                    });
+                });
+            } else {
+                lb.parentNode.classList.add("active");
+                optionItems.forEach((opt) => {
+                    opt.addEventListener("click", () => {
+                        handleSelect(lb, opt);
+                    });
+                });
+            }
+        };
+        const handleSelect = (label, item) => {
+            label.innerHTML = item.textContent;
+            label.parentNode.classList.remove("active");
+        };
+
+        const handleClose = (e) => {
+            // select 가 아닌경우 닫기
+            if (
+                !e.target.classList.contains("label") &&
+                !e.target.classList.contains("optionItem")
+            ) {
+                label.forEach(function (lb) {
+                    lb.parentNode.classList.remove("active");
+                });
+            }
+        };
+
+        window.addEventListener("click", (e) => handleClose(e));
+    });
+
+    // 거래 상세 이력 - 처리 로그 팝업 - tab button
+    $(function () {
+        $(".layer-pop4").each(function (i) {
+            var oTab = $(this);
+            var tabIndex = $(this)
+                .find(".tab-btn-list .on2")
+                .attr("id")
+                .match(/\d+$/);
+
+            $(this)
+                .find(".tab-content")
+                .find("#content-" + tabIndex[0])
+                .show();
+
+            $(this)
+                .find(".tab-btn-list div")
+                .click(function () {
+                    /*선택색인*/
+
+                    var tabIndex = $(this).attr("id").match(/\d+$/);
+                    /*타이틀*/
+                    oTab.find(".tab-btn-list div").removeClass("on2");
+                    $(this).addClass("on2");
+
+                    /*패널*/
+                    oTab.find(".tab-content .table-area").hide();
+                    oTab.find(".tab-content")
+                        .find("#content-" + tabIndex[0])
+                        .show();
+
+                    return false;
+                });
+        });
+    });
+
+    // tooltip, layer-pop2, layer-pop3
+    $(function () {
+        $(document).tooltip();
+    });
+
+    $(function () {
+        // 팝업 열기
+        $(document).on("click", ".view-more", function () {
+            $(".layer-pop2,.layer-pop3").show();
+        });
+
+        // 외부영역 클릭 시 팝업 닫기
+        $(document).mouseup(function (e) {
+            var LayerPopup = $(".layer-pop2,.layer-pop3");
+
+            if (LayerPopup.has(e.target).length === 0) {
+                LayerPopup.hide();
+            }
+        });
+    });
+
+    /* 230527 added */
+    // layer popup
+    function openLayer(obj) {
+        $(obj).show();
+        $(".layer-dim").show();
+    }
+
+    function closeLayer(obj) {
+        $(obj).hide();
+        $(".layer-dim").hide();
+    }
+
+    $(document).ready(function () {
+        $(".reset-pwd,.star-wrap span").click(function () {
+            openLayer($(".layer-pop"));
+        });
+        $(".outBtnCancel").click(function () {
+            closeLayer($(this).parents(".layer-pop"));
+        });
+    });
+
+    // 프로필 layer 여닫기
+    $(function () {
+        var target = $(".profile");
+
+        $(document).on("click", ".profile-txt", function (e) {
+            target.toggleClass("show");
+            return false;
+        });
+
+        $(document).click(function (e) {
+            if (target.has(e.target).length == 0) {
+                target.removeClass("show");
+            }
+        });
+    });
+
+    // tab-btn
+    document.addEventListener("DOMContentLoaded", function () {
+        const op1 = document.getElementById("op1");
+        const op2 = document.getElementById("op2");
+        const op3 = document.getElementById("op3");
+        const op2Result = document.getElementById("op2_result");
+        const fileArea = document.querySelector(".file > textarea");
+        const op3Result = document.getElementById("op3_result");
+        const fileArea02 = document.querySelector(".file-upload-area");
+
+        const btnAddress = document.querySelector(
+            ".tab-btn button:nth-child(1)"
+        );
+        const btnBulkInput = document.querySelector(
+            ".tab-btn button:nth-child(2)"
+        );
+        const btnFileInput = document.querySelector(
+            ".tab-btn button:nth-child(3)"
+        );
+        const confirmButton = document.querySelector(
+            "#op2 button:nth-child(1)"
+        );
+        const addButton20 = document.querySelector("#op2 button:nth-child(2)");
+        const confirmButton02 = document.querySelector(
+            "#op3 button:nth-child(1)"
+        );
+        const addButton2002 = document.querySelector(
+            "#op3  button:nth-child(2)"
+        );
+
+        // 기본적으로 페이지 로딩 시 주소록이 눌린 상태로 설정
+        op1.style.display = "block";
+        op2.style.display = "none";
+        op3.style.display = "none";
+
+        btnAddress.addEventListener("click", function () {
+            op1.style.display = "block";
+            op2.style.display = "none";
+            op3.style.display = "none";
+        });
+
+        btnBulkInput.addEventListener("click", function () {
+            op1.style.display = "none";
+            op2.style.display = "block";
+            op3.style.display = "none";
+        });
+
+        btnFileInput.addEventListener("click", function () {
+            op1.style.display = "none";
+            op2.style.display = "none";
+            op3.style.display = "block";
+        });
+
+        confirmButton.addEventListener("click", function () {
+            // 확인 버튼 클릭 시 op2_result 표시 및 .file 숨김
+            op2Result.style.display = "block"; // 테이블 형태로 변경
+            fileArea.style.display = "none";
+            confirmButton.style.display = "none";
+            addButton20.style.display = "block";
+        });
+
+        confirmButton02.addEventListener("click", function () {
+            // 확인 버튼 클릭 시 op2_result 표시 및 .file 숨김
+            op3Result.style.display = "block"; // 테이블 형태로 변경
+            fileArea02.style.display = "none";
+            confirmButton02.style.display = "none";
+            addButton2002.style.display = "block";
+        });
+    });
+
+    // radio
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const groupTable = document.getElementById("group_list");
+        const abcTable = document.getElementById("abc_list");
+        const groupRadio = document.getElementById("group");
+        const abcRadio = document.getElementById("abc");
+
+        // Function to toggle table visibility based on selected radio button
+        function toggleTableVisibility() {
+            abcTable.style.display = abcRadio.checked ? "block" : "none";
+            groupTable.style.display = groupRadio.checked ? "block" : "none";
+        }
+
+        // Initial setup
+        toggleTableVisibility();
+
+        // Add event listener to radio buttons
+        groupRadio.addEventListener("change", toggleTableVisibility);
+        abcRadio.addEventListener("change", toggleTableVisibility);
+    });
+
+    //   group순
+
+    // function toggleGroup(group) {
+    //     const rows = document.querySelectorAll("." + group);
+
+    //     rows.forEach((row) => {
+    //         row.classList.toggle("hidden-row");
+    //     });
+    // }
+
+    // function handleGroupCheckbox(group) {
+    //     const groupCheckbox = document.getElementById("chk_all_" + group);
+    //     toggleGroup(group);
+    //     // 추가로 그룹이 열리거나 닫힐 때 필요한 동작 수행
+    // }
+
+    // $(function () {
+    //     $(".group-header .ic-down p").click(function () {
+    //         $(this).parents(".ic-down").toggleClass("ic-up");
+    //     });
+    // });
+
+    function toggleGroup(group) {
+        const rows = document.querySelectorAll("." + group);
+
+        rows.forEach((row) => {
+            row.classList.toggle("hidden-row");
+        });
+    }
+
+    function handleGroupCheckbox(group) {
+        const groupCheckbox = document.getElementById("chk_all_" + group);
+        const rows = document.querySelectorAll(
+            "." + group + " input[type='checkbox']"
+        );
+
+        rows.forEach((row) => {
+            row.checked = groupCheckbox.checked;
+        });
+
+        // 추가로 그룹이 열리거나 닫힐 때 필요한 동작 수행
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        $(".group-header .ic-down p").click(function (event) {
+            if (!event.target.matches('input[type="checkbox"]')) {
+                $(this).parents(".ic-down").toggleClass("ic-up");
+                const group = $(this)
+                    .parents(".group-header")
+                    .attr("class")
+                    .split(" ")[1];
+                toggleGroup(group);
+            }
+        });
+
+        $(".group-header input[type='checkbox']").click(function () {
+            const group = $(this)
+                .parents(".group-header")
+                .attr("class")
+                .split(" ")[1];
+            handleGroupCheckbox(group);
+        });
+    });
+
+    // 이미지 추가
+    $(document).ready(function () {
+        $("#check-add").click(function () {
+            $(".img-wrap").toggle();
+        });
+    });
+
+    // 발송 라디오
+    function toggleActive(button) {
+        // 모든 버튼에서 active 클래스 제거
+        document
+            .querySelectorAll(".btn-md-gray02")
+            .forEach((btn) => btn.classList.remove("active"));
+
+        // 클릭한 버튼에만 active 클래스 추가
+        button.classList.add("active");
+    }
+
+    // 즉시발송,예약발송
+
+    function toggleBoxVisibility(boxId, button) {
+        // 모든 box를 숨김
+        document.getElementById("immediateBox").style.display = "none";
+        document.getElementById("scheduledBox").style.display = "none";
+
+        // 클릭한 버튼에 active 클래스 추가
+        document
+            .querySelectorAll(".btn-md-gray02")
+            .forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        // 해당하는 box만 보이게 함
+        document.getElementById(boxId).style.display = "flex";
+    }
+
+    // table img hover
+    $(function () {
+        var title_;
+        var class_;
+        var imgTag;
+
+        $("td > a").hover(
+            function (e) {
+                // <a> hover 시 : mouseEnter
+
+                title_ = $(this).attr("title"); // title을 변수에 저장
+                class_ = $(this).attr("class"); // class를 변수에 저장
+                $(this).attr("title", ""); // title 속성 삭제( 기본 툴팁 기능 방지 )
+
+                if (class_ == "img") {
+                    // class_ 가 img라면,
+                    // title_을 주소로 가진 <img>를 변수 imgTag에 저장
+                    imgTag =
+                        "<img src='" +
+                        title_ +
+                        "' width='100px' height:'100px' />";
+                }
+
+                $("body").append("<div id='tip'></div>"); // body 내부에 div#tip 생성
+
+                // class_ 값에 따라 이미지 or 텍스트 출력 구분
+                if (class_ == "img") {
+                    $("#tip").html(imgTag);
+                    $("#tip").css("width", "100px");
+                } else {
+                    $("#tip").css("width", "300px");
+                    $("#tip").text(title_);
+                }
+
+                // 툴팁이 현재 hover 한 요소의 상단에 생성되도록 설정
+                var pageX = $(this).offset().left - 20;
+                var pageY = $(this).offset().top - $("#tip").innerHeight();
+                $("#tip")
+                    .css({ left: pageX + "px", top: pageY + "px" })
+                    .fadeIn(500);
+            },
+            function () {
+                // <a> hover 시 : mouseLeave
+
+                $(this).attr("title", title_); // title 속성 반환
+                $("#tip").remove(); // div#tip 삭제
+            }
+        );
+    });
+
+    // tab 일반,회신
+    function toggleMessageDisplay(messageType) {
+        if (messageType === "normal") {
+            document.getElementById("message01").style.display = "block";
+            document.getElementById("message02").style.display = "none";
+        } else if (messageType === "reply") {
+            document.getElementById("message01").style.display = "none";
+            document.getElementById("message02").style.display = "block";
+        }
+    }
+
+    // 주소록 연락처 등록 팝업
+
+    document.addEventListener("DOMContentLoaded", function () {
+        showArticle("directInput");
+        hideElement("fileUploadData");
+
+        const uploadBtn = document.getElementById("uploadBtn");
+        const fileUploadData = document.getElementById("fileUploadData");
+
+        if (uploadBtn && fileUploadData) {
+            uploadBtn.addEventListener("click", function () {
+                fileUploadData.style.display = "block";
+                hideElement("fileUpload");
+            });
+        }
+    });
+
+    function showArticle(articleId) {
+        const articles = document.querySelectorAll(".number .input-wrap");
+        articles.forEach((article) => {
+            article.style.display = "none";
+        });
+
+        const selectedArticle = document.getElementById(articleId);
+        if (selectedArticle) {
+            selectedArticle.style.display = "flex";
+        }
+    }
+
+    function hideElement(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.style.display = "none";
+        }
+    }
+
+    // 문자함 tab
+    document.addEventListener("DOMContentLoaded", function () {
+        const tabButtons = document.querySelectorAll(".tab-btn02 button");
+        const containers = document.querySelectorAll(".container");
+
+        tabButtons.forEach((button, index) => {
+            button.addEventListener("click", function () {
+                // 모든 컨테이너 숨기기
+                containers.forEach((container) => {
+                    container.style.display = "none";
+                });
+
+                // 클릭한 버튼에 해당하는 컨테이너 표시
+                containers[index].style.display = "block";
+
+                // 모든 버튼에서 active 클래스 제거
+                tabButtons.forEach((btn) => {
+                    btn.classList.remove("active");
+                });
+
+                // 클릭한 버튼에 active 클래스 추가
+                button.classList.add("active");
+            });
+        });
+    });
+    // 충전금액 토글
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("infoToggleButton");
+        const infoData = document.querySelector(".info-data");
+
+        // 초기에 'display' 속성을 'none'으로 설정
+        if (infoData) {
+            infoData.style.display = "none";
+        }
+
+        toggleButton.addEventListener("click", () => {
+            if (infoData && infoData.style.display === "none") {
+                infoData.style.display = "block";
+            } else if (infoData) {
+                infoData.style.display = "none";
+            }
+        });
+    });
+
+    // 발신번호관리 radio
+    function toggleDiv(divId) {
+        // 모든 div를 감춤
+        document.querySelector(".self-phone-number").style.display = "none";
+        document.querySelector(".other-phone-number").style.display = "none";
+
+        // 선택한 div만 보이게 함
+        document.querySelector("." + divId).style.display = "block";
+    }
+
+    // 발신번호관리 탭버튼
+    function toggleTab03(tab) {
+        // 모든 wrapper 비활성화
+        document.querySelectorAll(".wrapper").forEach(function (wrapper) {
+            wrapper.style.display = "none"; // 모든 wrapper를 감춤
+            wrapper.classList.remove("active"); // 모든 wrapper의 active 클래스 제거
+        });
+
+        // 클릭한 버튼에 따라 해당하는 wrapper를 활성화
+        var targetWrapper = document.querySelector("." + tab);
+        targetWrapper.style.display = "flex"; // 선택한 wrapper를 보이게 함
+        targetWrapper.classList.add("active"); // 선택한 wrapper에 active 클래스 추가
+
+        // info02와 info03도 함께 조절
+        if (tab === "registration") {
+            document.querySelector(".info02").style.display = "flex";
+            document.querySelector(".info03").style.display = "none";
+        } else if (tab === "my-number") {
+            document.querySelector(".info02").style.display = "none";
+            document.querySelector(".info03").style.display = "flex";
+        }
+    }
+    // 충전내역 탭버튼
+    function toggleTab(tab) {
+        // 모든 내역 비활성화
+        document.querySelectorAll(".charge, .use").forEach(function (element) {
+            element.style.display = "none";
+        });
+
+        // 클릭한 탭에 따라 해당하는 내역을 활성화
+        document.querySelector("." + tab).style.display = "block";
+    }
+
+    // 충전내역 탭버튼
+    function toggleChargeTab(tab) {
+        // 모든 내역 비활성화
+        document.querySelectorAll(".myCg, .comCg").forEach(function (element) {
+            element.style.display = "none";
+        });
+
+        // 클릭한 탭에 따라 해당하는 내역을 활성화
+        document.querySelector("." + tab).style.display = "block";
+    }
+
+    // com.js 파일에 저장될 JavaScript 코드
+    document.addEventListener("DOMContentLoaded", function () {
+        // HTML 요소 선택
+        const modifyOption = document.getElementById("abc");
+        const cancelOption = document.getElementById("group");
+        const modifyChargeSection = document.querySelector(".chargeCg");
+        const cancelChargeSection = document.querySelector(".chargeCc");
+
+        // 초기 설정: 충전금액수정 옵션 선택
+        modifyChargeSection.style.display = "block";
+        cancelChargeSection.style.display = "none";
+
+        // 충전 옵션 변경 시 이벤트 처리
+        modifyOption.addEventListener("change", function () {
+            if (this.checked) {
+                modifyChargeSection.style.display = "block";
+                cancelChargeSection.style.display = "none";
+            }
+        });
+
+        cancelOption.addEventListener("change", function () {
+            if (this.checked) {
+                modifyChargeSection.style.display = "none";
+                cancelChargeSection.style.display = "block";
+            }
+        });
+    });
+
+    // 비밀번호 변경
+    document.addEventListener("DOMContentLoaded", function () {
+        const changePasswordBtn = document.querySelector(".btn-sm-gray"); // 비밀번호 변경 버튼
+        const passwordFields = document.querySelector(".pwd-change"); // pwd-change 클래스를 가진 요소 선택
+        const passwordLabel = document.querySelector(".pwd-change02"); // 비밀번호 label 요소 선택
+
+        // 비밀번호 변경 버튼 클릭 시
+        changePasswordBtn.addEventListener("click", function () {
+            if (
+                passwordFields.style.display === "none" ||
+                passwordFields.style.display === ""
+            ) {
+                passwordFields.style.display = "block"; // pwd-change 클래스를 가진 요소를 보이도록 설정
+                passwordLabel.style.display = "none"; // 비밀번호 label 요소를 숨김 처리
+            }
+        });
+
+        // 취소 버튼 클릭 시
+        const cancelButton = document.querySelector(".pwd-change .btn-sm-gray"); // pwd-change 내의 취소 버튼 선택
+        cancelButton.addEventListener("click", function () {
+            passwordFields.style.display = "none"; // pwd-change 클래스를 가진 요소를 숨기도록 설정
+            passwordLabel.style.display = "block"; // 비밀번호 label 요소를 다시 보이도록 설정
+            resetPasswordFields(); // 비밀번호 필드 초기화
+        });
+
+        function resetPasswordFields() {
+            const passwordInputs = document.querySelectorAll(
+                '.pwd-change input[type="text"]'
+            ); // pwd-change 내의 input 요소들
+
+            // 입력된 비밀번호 초기화
+            passwordInputs.forEach(function (input) {
+                input.value = "";
+            });
+        }
+    });
+
+    // abc_list 선택
+    document.addEventListener("DOMContentLoaded", function () {
+        var table = document.getElementById("abc_list");
+        var checkboxes = table.querySelectorAll("input[type='checkbox']");
+        var rows = table.querySelectorAll("tbody tr");
+        var chkAll = table.querySelector("#chk_all");
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", function () {
+                var row = this.closest("tr");
+
+                if (this.checked) {
+                    row.classList.add("selected");
+                } else {
+                    row.classList.remove("selected");
+                }
+            });
+        });
+
+        rows.forEach(function (row) {
+            row.style.cursor = "pointer"; // 각 행에 커서 포인터 설정
+
+            row.addEventListener("click", function () {
+                var checkbox = this.querySelector("input[type='checkbox']");
+                checkbox.checked = !checkbox.checked;
+
+                if (checkbox.checked) {
+                    this.classList.add("selected");
+                } else {
+                    this.classList.remove("selected");
+                }
+            });
+        });
+
+        chkAll.addEventListener("change", function () {
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = chkAll.checked;
+
+                var row = checkbox.closest("tr");
+
+                if (chkAll.checked) {
+                    row.classList.add("selected");
+                } else {
+                    row.classList.remove("selected");
+                }
+            });
+        });
+    });
+
+    // group_list 선택
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var table = document.getElementById("group_list");
+        var checkboxes = table.querySelectorAll("input[type='checkbox']");
+        var rows = table.querySelectorAll("tbody tr:not(.group-header)");
+        var chkAllGroups = table.querySelectorAll("input[id^='chk_all_group']");
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", function () {
+                var row = this.closest("tr");
+
+                if (this.checked) {
+                    row.classList.add("selected");
+                } else {
+                    row.classList.remove("selected");
+                }
+
+                // 그룹 헤더의 경우 selected 클래스를 추가하지 않도록 합니다.
+                if (row.classList.contains("group-header")) {
+                    row.classList.remove("selected");
+                }
+            });
+        });
+
+        rows.forEach(function (row) {
+            row.style.cursor = "pointer"; // 각 행에 커서 포인터 설정
+
+            row.addEventListener("click", function (event) {
+                if (event.target.tagName !== "INPUT") {
+                    var checkbox = this.querySelector("input[type='checkbox']");
+                    checkbox.checked = !checkbox.checked;
+
+                    if (checkbox.checked) {
+                        this.classList.add("selected");
+                    } else {
+                        this.classList.remove("selected");
+                    }
+                }
+            });
+        });
+
+        chkAllGroups.forEach(function (chkAll) {
+            chkAll.addEventListener("change", function () {
+                var groupName = this.id.split("_")[2]; // 그룹 이름 추출
+
+                var groupRows = document.querySelectorAll("." + groupName);
+                groupRows.forEach(function (row) {
+                    var checkbox = row.querySelector("input[type='checkbox']");
+                    checkbox.checked = chkAll.checked;
+
+                    if (chkAll.checked) {
+                        row.classList.add("selected");
+                    } else {
+                        row.classList.remove("selected");
+                    }
+                });
+            });
+        });
+
+        // 그룹 헤더를 클릭할 때 토글 기능만 활성화되도록 합니다.
+        var groupHeaders = table.querySelectorAll(".group-header");
+        groupHeaders.forEach(function (header) {
+            header.addEventListener("click", function () {
+                toggleGroup(this.getAttribute("data-group"));
+            });
+        });
+    });
+
+    // 그룹 토글 함수 정의
+    function toggleGroup(groupName) {
+        var groupRows = document.querySelectorAll("." + groupName);
+        groupRows.forEach(function (row) {
+            var checkbox = row.querySelector("input[type='checkbox']");
+            checkbox.checked = !checkbox.checked;
+
+            if (checkbox.checked) {
+                row.classList.add("selected");
+            } else {
+                row.classList.remove("selected");
+            }
+        });
+    }
+    function toggleGroup(groupName) {
+        var groupRows = document.querySelectorAll(
+            "." + groupName + ":not(.group-header)"
+        );
+        groupRows.forEach(function (row) {
+            row.classList.toggle("hidden-row");
+        });
+    }
+
+    //group-list chk_all 할때 닫히는거 해결해야함
+</script>

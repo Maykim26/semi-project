@@ -6,16 +6,35 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<title>Document</title>
+		<title>숫자 맞추기 게임</title>
 		<link rel="stylesheet" href="./css/style.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<h5>숫자 맞추기 게임</h5>
-		<div id="resultArea">결과가 나온당</div>
-		<div id="chanceArea">남은 찬스 :</div>
-		<input id="userInput" type="number" />
-		<button id="playBtn">go</button>
-		<button id="resetBtn">reset</button>
+		<div class="game-container">
+			<h1>숫자 맞추기 게임</h1>
+			<div id="resultArea" class="result-area">결과</div>
+			<div id="chanceArea" class="chance-area">
+				남은 찬스 : 5
+			</div>
+			<input
+				id="userInput"
+				type="number"
+				placeholder="1~100 사이 숫자"
+				class="input-field"
+			/>
+			<div class="buttons">
+				<button id="playBtn" class="play-btn">
+					Go
+				</button>
+				<button id="resetBtn" class="reset-btn">
+					Reset
+				</button>
+			</div>
+		</div>
 		<script src="./js/main.js"></script>
 	</body>
 </html>

@@ -25,14 +25,14 @@ body {
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 1.3rem;
 	margin-bottom: 20px;
 	color: #202124;
 	font-weight: 500;
 }
 
 .result-area {
-	font-size: 1.2rem;
+	font-size: 1rem;
 	margin-bottom: 15px;
 	color: #202124;
 	font-weight: 400;
@@ -78,7 +78,9 @@ h1 {
 	transition: background-color 0.2s ease, transform 0.1s ease;
 	width: 120px;
 }
-
+#resetBtn {
+	background-color: #ff610c;
+}
 .buttons button:hover {
 	background-color: #357ae8;
 	transform: translateY(-2px);
